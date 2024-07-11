@@ -54,8 +54,8 @@
 </head>
 <body>
     <div id="game-board"></div>
-    <button id="shuffle-button">Shuffle</button>
-    <div id="timer">Time: 0.000s</div>
+    <button id="shuffle-button">点击开始游戏</button>
+    <div id="timer">用时: 0.000s</div>
     <div id="message"></div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -77,8 +77,7 @@
                     gameBoard.appendChild(tile);
                 }
                 tiles.push(null); // Represent the empty space
-                shuffleBoard();
-                resetTimer();
+                renderBoard();
             };
 
             const shuffleBoard = () => {
@@ -100,7 +99,7 @@
                     renderBoard();
                     if (isSolved()) {
                         clearInterval(timer);
-                        messageElement.textContent = "Congratulations! You've solved the puzzle!";
+                        messageElement.textContent = "恭喜！你完成了游戏";
                     }
                 }
             };
@@ -161,19 +160,18 @@
                 timer = setInterval(() => {
                     const currentTime = performance.now();
                     const elapsedTime = (currentTime - startTime) / 1000;
-                    timerElement.textContent = `Time: ${elapsedTime.toFixed(3)}s`;
+                    timerElement.textContent = `用时: ${elapsedTime.toFixed(3)}s`;
                 }, 100);
             };
 
             const resetTimer = () => {
                 clearInterval(timer);
-                timerElement.textContent = 'Time: 0.000s';
+                timerElement.textContent = '用时: 0.000s';
                 messageElement.textContent = '';
             };
 
             shuffleButton.addEventListener('click', shuffleBoard);
             initGame();
-            renderBoard();
         });
     </script>
 </body>
